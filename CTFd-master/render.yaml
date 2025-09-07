@@ -1,0 +1,30 @@
+# render.yaml for CTFd deployment
+services:
+  - type: web
+    name: CTFd
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        value: "rfhfhjdgd45uy55udur" # generate from https://djecrety.ir
+      - key: DATABASE_URL
+        fromDatabase:
+          name: CTFdPostgres
+          property: connectionString
+      - key: REDIS_URL
+        fromDatabase:
+          name: CTFdRedis
+          property: connectionString
+
+databases:
+  - name: CTFdPostgres
+    databaseName: ctfd
+    user: ctfduser
+    password: ctfdpassword
+    plan: free
+
+  - name: CTFdRedis
+    type: redis
+    plan: free
