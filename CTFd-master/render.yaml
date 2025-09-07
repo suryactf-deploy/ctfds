@@ -3,7 +3,7 @@ services:
   - type: web
     name: CTFd
     env: docker
-    dockerfilePath: dockerfile
+    dockerfilePath: Dckerfile
     plan: free
     autoDeploy: true
     envVars:
